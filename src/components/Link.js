@@ -1,5 +1,5 @@
 import React from "react";
-import Proptypes from "prop-types";
+import PropTypes from "prop-types";
 
 const Link = ({ active, children, onClick }) => {
   if (active) {
@@ -10,12 +10,18 @@ const Link = ({ active, children, onClick }) => {
       href=""
       onClick={e => {
         e.preventDefault();
-        onclick();
+        onClick();
       }}
     >
       {children}
     </a>
   );
+};
+
+Link.propTypes = {
+  active: PropTypes.bool.isRequired,
+  children: PropTypes.node.isRequired,
+  onClick: PropTypes.func.isRequired
 };
 
 export default Link;

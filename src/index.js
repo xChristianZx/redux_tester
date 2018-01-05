@@ -1,14 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
-import registerServiceWorker from "./registerServiceWorker";
+import { Provider } from "react-redux";
 import { createStore } from "redux";
 import todoApp from "./reducers";
-import { addTodo, toggleTodo, setVisibilityFilter } from "./actions";
-import { VisibilityFilters } from "./actions/types";
+import App from "./App";
+// import { addTodo, toggleTodo, setVisibilityFilter } from "./actions";
+// import { VisibilityFilters } from "./actions/types";
+import registerServiceWorker from "./registerServiceWorker";
 
-let store = createStore(todoApp);
+let store = createStore(todoApp, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 // // Log the initial state
 // console.log(store.getState());
 
@@ -27,5 +28,10 @@ let store = createStore(todoApp);
 // // Stop listening to state updates
 // unsubscribe();
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);
 registerServiceWorker();
